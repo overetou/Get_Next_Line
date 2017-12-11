@@ -1,6 +1,34 @@
-void	ft_lst_to_str(char **line, t_list stock)
+void	ft_memory_del(t_memory **head)
 {
+	t_memory *next;
 
+	next = *head->next;
+	free(BUFF_SIZE);
+	free(*head);
+	*head = next;
+}
+
+void	ft_lst_to_str(char **line, t_list **stock, int y)
+{
+	int		x;
+	t_list	*head;
+
+	x = 0;
+	head = *stock;
+	*line = ft_strnew(y);
+	while (head->next)
+	{
+		ft_memcpy(*line[x++], head->content, 1);
+		head = head->next;
+	}
+	while(*stock)
+	{
+		head = (*stock)->next;
+		free(*stock->constent);
+		free(*stock);
+		*stock = head;
+	}
+	stock = NULL;
 }
 
 static t_memory	*ft_search_fd(int fd, t_memory **memory)
@@ -48,9 +76,7 @@ int				ft_make_line(int floor, t_memory **head, **line)
 			}
 			floor = 0;
 		}
-		*line = ft_strnew(y);
-		ft_lst_to_str(line, stock);
-		//ft_lstdel(stock);
+		ft_lst_to_str(line, stock, y);
 	}
 }
 
