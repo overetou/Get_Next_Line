@@ -12,4 +12,12 @@ typedef struct	s_memory
 	struct s_memory	next;
 }		t_memory;
 
+typedef struct	s_mess
+{
+	int 		x;
+	int 		y;
+	int		floor;
+	t_memory	head;
+}		t_mess;
+
 #endif
