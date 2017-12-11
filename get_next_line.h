@@ -10,14 +10,13 @@ typedef struct	s_memory
 	int		fd;
 	char		cpy[BUFF_SIZE];
 	struct s_memory	next;
-}		t_memory;
+}				t_memory;
 
-typedef struct	s_mess
+typedef struct	s_list
 {
-	int 		x;
-	int 		y;
-	int		floor;
-	t_memory	head;
-}		t_mess;
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}				t_list;
 
 #endif
