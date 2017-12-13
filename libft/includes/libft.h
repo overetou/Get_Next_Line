@@ -6,7 +6,7 @@
 /*   By: overetou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:45:07 by overetou          #+#    #+#             */
-/*   Updated: 2017/11/10 11:45:20 by overetou         ###   ########.fr       */
+/*   Updated: 2017/12/12 17:10:49 by overetou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ void			ft_lstprint(t_list *list);
 void			ft_tabprint(char **tab);
 void			ft_lstpushback(t_list *lst, t_list *new);
 t_list			*ft_lstaddlink(t_list *lst, char *content, size_t content_size);
+void			ft_lstaddnext(t_list *lst, t_list *new);
 
 #endif

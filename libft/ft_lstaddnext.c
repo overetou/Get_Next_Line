@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstprint.c                                      :+:      :+:    :+:   */
+/*   ft_lstaddnext.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: overetou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: overetou <overetou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/24 20:56:16 by overetou          #+#    #+#             */
-/*   Updated: 2017/12/12 18:40:32 by overetou         ###   ########.fr       */
+/*   Created: 2017/12/12 15:50:42 by overetou          #+#    #+#             */
+/*   Updated: 2017/12/12 17:11:53 by overetou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstprint(t_list *list)
+void	ft_lstaddnext(t_list *lst, t_list *new)
 {
-	while (list)
-	{
-		ft_putchar(((char*)list->content)[0]);
-		list = list->next;
-	}
+	while (lst->next)
+		lst = lst->next;
+	lst->next = new;
 }

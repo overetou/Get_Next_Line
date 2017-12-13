@@ -6,7 +6,7 @@
 #    By: overetou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/10 12:25:00 by overetou          #+#    #+#              #
-#    Updated: 2017/12/06 21:09:55 by overetou         ###   ########.fr        #
+#    Updated: 2017/12/12 17:24:35 by overetou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC = ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	ft_toupper.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
 	ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_tests.c \
 	ft_lstprint.c ft_tabprint.c ft_lstpushback.c ft_lstaddlink.c \
-	ft_atoi.c
+	ft_atoi.c ft_lstaddnext.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -37,7 +37,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME):
-	gcc -Werror -Wextra -Wall -c $(SRC) -I .
+	gcc -Werror -Wextra -Wall -c $(SRC) -I includes/
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
