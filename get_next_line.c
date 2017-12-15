@@ -14,31 +14,69 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+int ft_pile(char **line, char *cpy)
+{
+	int x;
+	char part[BUFF_SIZE];
+	char *to_delete;
+
+	x = 0;
+	if (!(*line))
+	{
+		if (!(*line = ft_strnew(0)))
+			return (-1);
+	}
+	while (cpy[x] != '\n' && cpy[x])
+		x++;
+	ft_strncpy(part, cpy, x);
+	part[x] = '\0';
+	to_delete = *line;
+	*line = ft_strjoin(*line, part);
+	ft_strdel(&to_delete);
+	return (x);
+}
+
+int ft_build_line(char *cpy, char **line, int y, int fd)
+{
+	int rvalue;
+	int x;
+
+	rvalue = 1;
+	while (cpy[y] != '\n' && rvalue)
+	{
+		if ((x = ft_pile(line, cpy + y)) == -1)
+			return (-1);
+		y += x;
+		if (!cpy[y])
+		{
+			rvalue = read(fd, cpy, BUFF_SIZE);
+			ft_strclr(cpy + rvalue);
+			y = 0;
+		}
+	}
+	return (y);
+}
 
 int	get_next_line(const int fd, char **line)
 {
-	size_t			x;
 	static char		cpy[BUFF_SIZE];
-	size_t			floor;
-	int				rvalue;
+	int				y;
 
-	x = 0;
-	floor = 0;
-	ft_strclr(*line);
-	if (!cpy[0])
+	*line = NULL;
+	if (!(cpy[0]))
 	{
-		rvalue = read(fd, cpy, BUFF_SIZE);
-		if (rvalue == -1 || !rvalue)
-			return (rvalue);
+		y = read(fd, cpy, BUFF_SIZE);
+		if (y == -1 || !y)
+			return (y);
+		y = 0;
 	}
 	else
 	{
-		while (cpy[floor] != 'X')
-			floor++;
-		cpy[floor] = '.';
-		floor++;
+		cpy[(y = ft_strchr(cpy, 'x') - cpy)] = '.';
+		y++;
 	}
-	//x = ft_build_line(line, cpy + floor);
-	//ft_update_cpy(&cpy, x);
-	return (x);
+	y = ft_build_line(cpy, line, y, fd);
+	if (y == -1)
+		return (-1);
+	return (1);
 }

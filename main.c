@@ -15,35 +15,16 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int ft_build_line(char **line, char *cpy)
-{
-	int x;
-	char part[BUFF_SIZE];
-	char *to_delete;
-
-	x = 0;
-	*line = ft_strnew(0);
-	while (cpy[x] != '\n')
-	{
-		x = 0;
-		while (cpy[x] != '\n' && cpy[x])
-			x++;		
-		ft_strncpy(part, cpy, x);
-		part[x] = '\0';
-		to_delete = *line;
-		*line = ft_strjoin(*line, part);
-		ft_strdel(&to_delete);
-	}
-	return (0);
-}
-
 int main(void)
 {
 	char *line;
-	char cpy[] = "ca roule ?\n Coucou";
+	int fd;
 
-	ft_build_line(&line, cpy);
+	fd = open("test", O_RDONLY);
+	get_next_line(fd, &line);
 	ft_putendl(line);
+	ft_strdel(&line);
+	close(fd);
 	return (0);
 }
 
