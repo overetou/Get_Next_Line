@@ -15,15 +15,25 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int main(void)
+int main(int argc, char **argv)
 {
 	char *line;
 	int fd;
+	int rvalue;
 
-	fd = open("test", O_RDONLY);
-	get_next_line(fd, &line);
-	ft_putendl(line);
-	ft_strdel(&line);
+	(void)argc;
+	fd = open(argv[1], O_RDONLY);
+	//rvalue = get_next_line(fd, &line);
+	//ft_putendl(line);
+	//ft_strdel(&line);
+	//ft_putchar('\n');
+	while ((rvalue = get_next_line(fd, &line)))
+	{
+		ft_putendl(line);
+		ft_strdel(&line);
+		ft_putnbr(rvalue);
+		ft_putchar('\n');
+	}
 	close(fd);
 	return (0);
 }
