@@ -24,20 +24,20 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		return (0);
 	fd = open(argv[1], O_RDONLY);
-	rvalue = get_next_line(fd, &line);
-	ft_putendl(line);
-	ft_strdel(&line);
-	ft_putnbr(rvalue);
-	ft_putchar('\n');
-	rvalue = get_next_line(fd, &line);
-	ft_putnbr(rvalue);
-	//while ((rvalue = get_next_line(fd, &line)))
-	//{
-	//	ft_putendl(line);
-	//	ft_strdel(&line);
-	//}
+	//rvalue = get_next_line(fd, &line);
+	//ft_putendl(line);
+	//ft_strdel(&line);
 	//ft_putnbr(rvalue);
 	//ft_putchar('\n');
+	//rvalue = get_next_line(fd, &line);
+	//ft_putnbr(rvalue);
+	while ((rvalue = get_next_line(fd, &line)) > 0)
+	{
+		//ft_putendl(line);
+		//ft_strdel(&line);
+		//ft_putnbr(rvalue);
+		//ft_putchar('\n');
+	}
 	close(fd);
 	return (0);
 }
