@@ -24,7 +24,8 @@ int ft_pile(char **line, char *cpy)
 	while (cpy[x] != '\n' && cpy[x])
 		x++;
 	ft_strncpy(part, cpy, x);
-	part[x] = '\0';
+	if (cpy[x])
+		part[x] = '\0';
 	to_delete = *line;
 	*line = ft_strjoin(*line, part);
 	ft_strdel(&to_delete);
