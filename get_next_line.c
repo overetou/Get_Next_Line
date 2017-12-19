@@ -17,7 +17,7 @@
 int	ft_pile(char **line, char *cpy)
 {
 	int		x;
-	char	part[BUFF_SIZE];
+	char	part[BUFF_SIZE + 1];
 	char	*to_delete;
 	int 	y;
 
@@ -52,18 +52,15 @@ int	ft_build_line(char *cpy, char **line, int y, int fd)
 		y += x;
 		if (!cpy[y])
 		{
+			ft_bzero(cpy, BUFF_SIZE);
 			rvalue = read(fd, cpy, BUFF_SIZE);
-			ft_strclr(cpy + rvalue);
-			ft_putstr("[");
-			ft_putstr(cpy);
-			ft_putstr("]");
 			y = 0;
 			if (!rvalue)
 				return (0);
+			if (*cpy == '\n')
+				return (0);
 		}
 	}
-	if (!cpy[y + 1])
-		return (0);
 	return (y);
 }
 
@@ -71,14 +68,12 @@ int	get_next_line(const int fd, char **line)
 {
 	static char		cpy[BUFF_SIZE];
 	int				y;
-	int				i;
+	size_t			i;
 
 	if (!(cpy[0]))
 	{
-		ft_putstr("!!");
+		ft_bzero(cpy, BUFF_SIZE);
 		y = read(fd, cpy, BUFF_SIZE);
-		ft_putstr(cpy);
-		ft_putstr("]");
 		if (y == -1 || !y)
 			return (y);
 		y = 0;
@@ -86,7 +81,7 @@ int	get_next_line(const int fd, char **line)
 	else
 	{
 		y = 0;
-		while (cpy[y] != '\n' && cpy[y])
+		while (cpy[y] != 'X')
 			y++;
 		cpy[y++] = '.';
 	}
@@ -94,8 +89,10 @@ int	get_next_line(const int fd, char **line)
 	if (y == -1)
 		return (-1);
 	i = 0;
-	while (i < y)
+	while (y--)
 		cpy[i++] = '.';
-	cpy[i] = '\0';
+	cpy[i] = 'X';
+	if (i + 1 == ft_strlen(cpy))
+		cpy[0] = '\0';
 	return (1);
 }

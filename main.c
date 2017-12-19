@@ -33,8 +33,8 @@ int main(int argc, char **argv)
 	//ft_putnbr(rvalue);
 	while ((rvalue = get_next_line(fd, &line)) > 0)
 	{
-		//ft_putendl(line);
-		//ft_strdel(&line);
+		ft_putstr(line);
+		ft_strdel(&line);
 		//ft_putnbr(rvalue);
 		//ft_putchar('\n');
 	}
