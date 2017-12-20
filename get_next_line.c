@@ -19,7 +19,7 @@ int	ft_pile(char **line, char *cpy)
 	int		x;
 	char	part[BUFF_SIZE + 1];
 	char	*to_delete;
-	int 	y;
+	int		y;
 
 	x = 0;
 	y = 0;
@@ -32,7 +32,7 @@ int	ft_pile(char **line, char *cpy)
 	}
 	part[y] = '\0';
 	to_delete = *line;
-	if(!(*line = ft_strjoin(*line, part)))
+	if (!(*line = ft_strjoin(*line, part)))
 		return (-1);
 	ft_strdel(&to_delete);
 	return (y);
@@ -80,19 +80,15 @@ int	get_next_line(const int fd, char **line)
 	}
 	else
 	{
-		y = 0;
-		while (cpy[y] != 'X')
-			y++;
+		y = ft_strchr(cpy, 'X') - cpy;
 		cpy[y++] = '.';
 	}
-	y = ft_build_line(cpy, line, y, fd);
-	if (y == -1)
+	if ((y = ft_build_line(cpy, line, y, fd)) == -1)
 		return (-1);
 	i = 0;
 	while (y--)
 		cpy[i++] = '.';
 	cpy[i] = 'X';
-	if (i + 1 == ft_strlen(cpy))
-		cpy[0] = '\0';
+	i + 1 == ft_strlen(cpy) ? cpy[0] = '\0' : (void)i;
 	return (1);
 }
