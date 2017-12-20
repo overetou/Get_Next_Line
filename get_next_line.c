@@ -64,9 +64,8 @@ int	ft_build_line(char *cpy, char **line, int y, int fd)
 	return (y);
 }
 
-int	get_next_line(const int fd, char **line)
+int	gnl_simple(const int fd, char **line, char *cpy)
 {
-	static char		cpy[BUFF_SIZE];
 	int				y;
 	size_t			i;
 
@@ -91,4 +90,24 @@ int	get_next_line(const int fd, char **line)
 	cpy[i] = 'X';
 	i + 1 == ft_strlen(cpy) ? cpy[0] = '\0' : (void)i;
 	return (1);
+}
+
+int	get_next_line(const int fd, char **line)
+{
+	static t_list	*master;
+	t_list			*head;
+
+	head = master;
+	while (head)
+	{
+		if ((int)head->content_size == fd)
+			return (gnl_simple((int)head->content_size, line, head->content));
+		head = head->next;
+	}
+	head = ft_lstnew(NULL, 0);
+	head->content_size = (size_t)fd;
+	head->content = ft_strnew(BUFF_SIZE);
+	ft_lstadd(&master, head);
+	head = master;
+	return (gnl_simple(fd, line, head->content));
 }
